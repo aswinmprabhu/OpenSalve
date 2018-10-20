@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Camp(models.Model):
+
+class Camps(models.Model):
     id = models.AutoField(
         primary_key=True,
         help_text='Unique ID of the camp',
@@ -19,14 +20,34 @@ class Camp(models.Model):
         help_text='Location name',
     )
 
-    admin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        db_column='user',
+    )
 
+    incharge = models.CharField(
+        max_length=40,
+        help_text='Camp incharge',
+    )
+    phone = models.CharField(
+        max_length=15,
+        help_text='Camp phone number'
+    )
+
+    photo = models.ImageField(
+        blank=True,
+        null=True,
+        upload_to='camps/%Y/%m/%d/'
+    )
 
     capacity = models.IntegerField(
-        help_text='The max capacity of the camp'        
+        help_text='The max capacity of the camp'
     )
     number_of_people = models.IntegerField(
         default=0,
         help_text='The number of people currently in the camp'
     )
 
+    def __str__(self):
+        return self.location

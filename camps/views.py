@@ -1,12 +1,26 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 
-from camps.models import Camp
+from camps.models import Camps
 from camps.serializers import CampsSerializer
+from help.permissions import IsVolunteer
 
 
-class AddCamp(generics.CreateAPIView):
+class Camp(generics.ListCreateAPIView):
+    """Get/Add request
+    get:
+    Get all camps
+    post:
+    Add a camp
+    """
+
+    permission_classes = (
+        IsAuthenticatedOrReadOnly,
+        IsVolunteer,
+    )
+
     serializer_class = CampsSerializer
+    queryset = Camps.objects.all()
 
 
 class ViewCamp(generics.RetrieveAPIView):
@@ -18,5 +32,5 @@ class ViewCamp(generics.RetrieveAPIView):
 
     def get_queryset(self):
         id = self.kwargs.get(self.lookup_url_kwarg)
-        camp = Camp.objects.filter(id=id)
+        camp = Camps.objects.filter(id=id)
         return camp

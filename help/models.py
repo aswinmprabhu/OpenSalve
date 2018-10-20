@@ -1,6 +1,6 @@
 from django.db import models
 
-from accounts.models import Users
+from django.contrib.auth.models import User
 
 
 class Requests(models.Model):
@@ -12,14 +12,17 @@ class Requests(models.Model):
         help_text='Unique ID of request',
     )
     lat = models.CharField(
+        blank=True,
         max_length=20,
         help_text='Latitude',
     )
     lng = models.CharField(
+        blank=True,
         max_length=20,
         help_text='Longitude',
     )
     location = models.CharField(
+        blank=True,
         max_length=60,
         help_text='Location name',
     )
@@ -27,6 +30,7 @@ class Requests(models.Model):
 
     # Requestee info
     name = models.CharField(
+        blank=True,
         max_length=50,
         help_text='Name of requestee',
     )
@@ -44,6 +48,7 @@ class Requests(models.Model):
         help_text='The number of people stranded with you'
     )
     source = models.CharField(
+        blank=True,
         max_length=40,
         help_text='Where this request call was obtained from',
     )
@@ -52,8 +57,10 @@ class Requests(models.Model):
     need_food = models.BooleanField(default=False)
     need_medicine = models.BooleanField(default=False)
     need_rescue = models.BooleanField(default=False)
+    need_water = models.BooleanField(default=False)
 
     status = models.CharField(
+        blank=True,
         max_length=15,
         help_text='Status of request'
     )
@@ -69,7 +76,7 @@ class Comments(models.Model):
     )
 
     user = models.ForeignKey(
-        Users,
+        User,
         on_delete=models.CASCADE,
         db_column='user',
     )

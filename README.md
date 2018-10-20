@@ -50,10 +50,19 @@ After cloning the repo,
 - [ ] Help Requests
     - [x] Register request
     - [x] Get request complete info
-    - [ ] Resolve request
-    - [ ] Status of request
-    - [ ] Comments on request
+    - [x] Resolve request
+    - [x] Status of request
+    - [x] Comments on request
     - [ ] Visualize request in maps
+    - [x] Editing requests
+    - [ ] Prioritizing Requests
+    - [ ] Live location with GPS
+- [ ] Camps
+    - [x] Add & List
+    - [ ] Camp requirements
+- [ ] Collection Centres
+    - [x] Add & List
+    - [ ] Supplies required
 
 ## API Docs
 
