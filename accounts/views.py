@@ -28,7 +28,7 @@ class UserLogin(APIView):
     authentication_classes = (BasicAuthentication, TokenAuthentication)
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         token, created = Token.objects.get_or_create(user=request.user)
 
         user = User.objects.get(username=request.user.username)
